@@ -1,0 +1,42 @@
+<header>
+  <h1>To-Do List</h1>
+</header>
+<section>
+  <form [formGroup]="todoForm">
+    <input type="text" formControlName="title" placeholder="Add task..." />
+    <button type="submit" (click)="createTodo()">Add</button>
+  </form>
+
+  <table width="100%" border="1">
+    <tr>
+      <th class="w-10 cntr"></th>
+      <th style="width: 10px">ID</th>
+      <th>Title</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    <tr
+      class="cntr"
+      *ngFor="let todo of todos; index as i"
+      [ngClass]="todo.completed == 1 ? 'green' : ''"
+    >
+      <td class="w-10" (click)="isComplete(todo, i)">
+        <!-- <span> &#10003; </span> -->
+        <input type="checkbox" [checked]="todo.completed == 1" />
+      </td>
+      <td>{{ todo.id }}</td>
+      <td style="text-align: left">
+        {{ todo.title }}
+      </td>
+      <td class="cntr w-50">
+        <button class="edit" (click)="editTodo(todo, i)">Edit</button>
+      </td>
+      <td class="cntr w-50">
+        <button class="edit" (click)="deleteTodo(todo, i)">Delete</button>
+      </td>
+    </tr>
+  </table>
+</section>
+<footer>
+  <p>&copy; 2023 To-Do App</p>
+</footer>
